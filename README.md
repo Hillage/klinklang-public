@@ -25,14 +25,14 @@ The Docker containers and the account_generation script can run on separate host
 - Klinklang license (`$help` in any channel in the Klinklang Discord server)
 
 Optional
-- Proxies (Basic Auth and IP Auth supported, see FAQ)
+- Proxies (Basic Auth and IP Auth supported, see [FAQ](#can-i-use-basicauth-for-my-proxies))
 
 ### Initial Setup
 1. Install additional requirements for account_generation script host: `pip install -r account_generation/requirements.txt`
 2. Create and customize configurations: `python configgenerator.py`
     - Answer all questions, it will create your configs based on your answers
 3. Create config for account_generation script: `cp account_generation/config.example.yml account_generation/config.yml`
-4. Edit config.yml from the previous step according to your needs (see *AccountGeneration Config* section for more info)
+4. Edit config.yml from the previous step according to your needs ([AccountGeneration Config](#accountGeneration-config) for more info)
 5. Start Docker containers if not started (`docker compose up -d`). Start Account Generation script (`python account_generation/account_generator.py`)
 
 ## AccountGeneration Config
@@ -129,6 +129,10 @@ These settings can be ignored, they are left over from previous code and are not
 #### What proxy provider should I use?
 
 This is something that is generally kept secret as higher usage increases the chance of the proxy being banned. Based on user reports in Discord, Webshare is generally banned. Residential proxies are often considered "better" when it comes to not being banned already however this is anecdotal.
+
+#### Can I use BasicAuth for my proxies?
+
+While technically supported most users report this does not work for them. If you want to try using BasicAuth make sure you use the format `USER:PASS@IP:PORT`
 
 
 ## Common Issues
