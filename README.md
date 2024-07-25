@@ -9,30 +9,25 @@ The Klinklang stack consists of a MongoDB database, a Stats collector, a mail re
 
 ### Requirements
 The Docker containers and the account_generation script can run on separate hosts or on the same host. Each host has its own requirements, if using one host for all components you must meet all requirements:
-- Linux (x86/ARM), Mac OS (x86/ARM), or Windows (x86) are supported
+1. Linux (x86/ARM), Mac OS (x86/ARM), or Windows (x86) are supported
   - The Docker containers can run headless
   - The account_generation script requires a desktop environment despite running headless
-
-- Host running account_generation script:
+2. Host running account_generation script:
   - Google Chrome installed on host OS
   - Python 3.11
     - pip
     - PyYAML (`pip install pyYaml`)
-
-- Host running Docker containers:
+3. Host running Docker containers:
   - Docker, with Docker components
-
-- Klinklang license (`$help` in any channel in the Klinklang Discord server)
-
-Optional
-- Proxies (Basic Auth and IP Auth supported, see [FAQ](#can-i-use-basicauth-for-my-proxies))
+4. Klinklang license (`$help` in any channel in the Klinklang Discord server)
+5. *Optional:* Proxies (Basic Auth and IP Auth supported, see [FAQ](#can-i-use-basicauth-for-my-proxies))
 
 ### Initial Setup
 1. Install additional requirements for account_generation script host: `pip install -r account_generation/requirements.txt`
 2. Create and customize configurations: `python configgenerator.py`
-    - Answer all questions, it will create your configs based on your answers
+- Answer all questions, it will create your configs based on your answers
 3. Create config for account_generation script: `cp account_generation/config.example.yml account_generation/config.yml`
-4. Edit config.yml from the previous step according to your needs ([AccountGeneration Config](#accountGeneration-config) for more info)
+4. Edit config.yml from the previous step according to your needs (see *AccountGeneration Config* section for more info)
 5. Start Docker containers if not started (`docker compose up -d`). Start Account Generation script (`python account_generation/account_generator.py`)
 
 ## AccountGeneration Config
@@ -65,48 +60,50 @@ subdomain_length: 32
 proxy_cooldown : 1900
 binary_location: ''
 ```
+#### Details: 
+<sup>(*=*required*)</sup>
 
-*`database`: Configuration for your Database Connection
+1. *`database`: Configuration for your Database Connection
 - `database_name`: the name of your database
 - `host`: the host of your database (can be ip or hostname)
 - `password`: the password of your database
 - `username`: the username of your database
 
-*`domains`: Configuration for the domains, which should be used for account generation, this is a list
+2. *`domains`: Configuration for the domains, which should be used for account generation, this is a list
 - `domain_name`: the domain used for emails, example: `mail.i-love-imperva.de` would generate emails with format `{account_name}@mail.i-love-imperva.de`
 
-*`proxies`: List of proxies to use. Not required if using proxy_file or if not using proxies at all
+3. *`proxies`: List of proxies to use. Not required if using proxy_file or if not using proxies at all
 - `proxy`: The ip and port of your proxy example `https://123.123.123.3:9000`
 - `rotating`: default `False`, if `True` the proxy will not have any cooldown between usages, your proxy provider will handle the rotation
 
-*`accounts`: Configuration for storing your generated accounts to files
+4. *`accounts`: Configuration for storing your generated accounts to files
 - `save_to_file`: if `True` the accounts will be saved to a file
 - `format`: The format in which the accounts should be stored in the file. `{email}` will be replace with the account email, `{username}` with the username, `password` with the password, `{dob}` with the date of birth, `{region}` will be replaced with the region
 
-*`proxy_file`: The name of the file containing a list of proxies to use. Not required if using proxies list in config or not using proxies at all
+5. *`proxy_file`: The name of the file containing a list of proxies to use. Not required if using proxies list in config or not using proxies at all
 - format is `ip:port` or `user:pass@host:port`. If you add a `/rotating` behind the proxy it will be marked as rotating, for example: `ip:port/rotating`
 
-*`license`: Your license key, if not given the program will give you a prompt
+6. *`license`: Your license key, if not given the program will give you a prompt
 
-`show_total_accounts`: if set to true, will display the total count of generated accounts after each generation attempt
+7. `show_total_accounts`: if set to true, will display the total count of generated accounts after each generation attempt
 
-`headless`: `true` is the default, set it to `false` if you want to see the browser window, nice for debugging
+8. `headless`: `true` is the default, set it to `false` if you want to see the browser window, nice for debugging
 
-`names_generator`: set to `true`to use more realistic usernames (`true` is generally recommended)
+9. `names_generator`: set to `true`to use more realistic usernames (`true` is generally recommended)
 
-`account_password`: if set all accounts will have the same password, if not a new random password will be generated
+10. `account_password`: if set all accounts will have the same password, if not a new random password will be generated
 
-`mail_prefix`: if set klinklang will generate accounts using the plus technique. This will generate emails like `{prefix}+{username}@{domain}`
+11. `mail_prefix`: if set klinklang will generate accounts using the plus technique. This will generate emails like `{prefix}+{username}@{domain}`
 
-`proxy_region`: if set klinklang will not attempt to auto-detect the region of the proxy, it will use the defined region for account information
+12. `proxy_region`: if set klinklang will not attempt to auto-detect the region of the proxy, it will use the defined region for account information
 
-`random_subdomain`: if set to true, klinklang will generate random subdomains for every account, for this your domain should support a catch all (e.g. `true` results in `randomsubdomain.i-love-imperva.de`)
+13. `random_subdomain`: if set to true, klinklang will generate random subdomains for every account, for this your domain should support a catch all (e.g. `true` results in `randomsubdomain.i-love-imperva.de`)
 
-`subdomain_length`: set a custom length for random subdomains, if enabled
+14. `subdomain_length`: set a custom length for random subdomains, if enabled
 
-`proxy_cooldown`: default 1900, the cooldown between the usage of the proxies in seconds. Decreasing this will increase the risk of your proxies getting blocked but increases the potential speed at which you can create accounts.
+15. `proxy_cooldown`: default 1900, the cooldown between the usage of the proxies in seconds. Decreasing this will increase the risk of your proxies getting blocked but increases the potential speed at which you can create accounts.
 
-`binary_location`: if set the defined binary will be used instead of the installed chrome version. For example if you have both Google Chrome and Brave installed on your mac (Chrome as default browser) and you want to use Brave you would add to your config `binary_location: '/Applications/Brave Browser.app/Contents/MacOS/Brave Browser'`
+16. `binary_location`: if set the defined binary will be used instead of the installed chrome version. For example if you have both Google Chrome and Brave installed on your mac (Chrome as default browser) and you want to use Brave you would add to your config `binary_location: '/Applications/Brave Browser.app/Contents/MacOS/Brave Browser'`
 
 ## FAQ
 
