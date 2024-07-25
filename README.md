@@ -60,8 +60,7 @@ subdomain_length: 32
 proxy_cooldown : 1900
 binary_location: ''
 ```
-#### Details: 
-<sup>(*=*required*)</sup>
+#### Details: <sup>(*=*required*)</sup>
 
 1. *`database`: Configuration for your Database Connection
    - `database_name`: the name of your database
