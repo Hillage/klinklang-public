@@ -10,22 +10,22 @@ The Klinklang stack consists of a MongoDB database, a Stats collector, a mail re
 ### Requirements
 The Docker containers and the account_generation script can run on separate hosts or on the same host. Each host has its own requirements, if using one host for all components you must meet all requirements:
 1. Linux (x86/ARM), Mac OS (x86/ARM), or Windows (x86) are supported
-  - The Docker containers can run headless
-  - The account_generation script requires a desktop environment despite running headless
+   - The Docker containers can run headless
+   - The account_generation script requires a desktop environment despite running headless
 2. Host running account_generation script:
-  - Google Chrome installed on host OS
-  - Python 3.11
-    - pip
-    - PyYAML (`pip install pyYaml`)
+   - Google Chrome installed on host OS
+   - Python 3.11
+     - pip
+     - PyYAML (`pip install pyYaml`)
 3. Host running Docker containers:
-  - Docker, with Docker components
+   - Docker, with Docker components
 4. Klinklang license (`$help` in any channel in the Klinklang Discord server)
 5. *Optional:* Proxies (Basic Auth and IP Auth supported, see [FAQ](#can-i-use-basicauth-for-my-proxies))
 
 ### Initial Setup
 1. Install additional requirements for account_generation script host: `pip install -r account_generation/requirements.txt`
 2. Create and customize configurations: `python configgenerator.py`
-- Answer all questions, it will create your configs based on your answers
+   - Answer all questions, it will create your configs based on your answers
 3. Create config for account_generation script: `cp account_generation/config.example.yml account_generation/config.yml`
 4. Edit config.yml from the previous step according to your needs (see *AccountGeneration Config* section for more info)
 5. Start Docker containers if not started (`docker compose up -d`). Start Account Generation script (`python account_generation/account_generator.py`)
@@ -64,24 +64,24 @@ binary_location: ''
 <sup>(*=*required*)</sup>
 
 1. *`database`: Configuration for your Database Connection
-- `database_name`: the name of your database
-- `host`: the host of your database (can be ip or hostname)
-- `password`: the password of your database
-- `username`: the username of your database
+   - `database_name`: the name of your database
+   - `host`: the host of your database (can be ip or hostname)
+   - `password`: the password of your database
+   - `username`: the username of your database
 
 2. *`domains`: Configuration for the domains, which should be used for account generation, this is a list
-- `domain_name`: the domain used for emails, example: `mail.i-love-imperva.de` would generate emails with format `{account_name}@mail.i-love-imperva.de`
+   - `domain_name`: the domain used for emails, example: `mail.i-love-imperva.de` would generate emails with format `{account_name}@mail.i-love-imperva.de`
 
 3. *`proxies`: List of proxies to use. Not required if using proxy_file or if not using proxies at all
-- `proxy`: The ip and port of your proxy example `https://123.123.123.3:9000`
-- `rotating`: default `False`, if `True` the proxy will not have any cooldown between usages, your proxy provider will handle the rotation
+   - `proxy`: The ip and port of your proxy example `https://123.123.123.3:9000`
+   - `rotating`: default `False`, if `True` the proxy will not have any cooldown between usages, your proxy provider will handle the rotation
 
 4. *`accounts`: Configuration for storing your generated accounts to files
-- `save_to_file`: if `True` the accounts will be saved to a file
-- `format`: The format in which the accounts should be stored in the file. `{email}` will be replace with the account email, `{username}` with the username, `password` with the password, `{dob}` with the date of birth, `{region}` will be replaced with the region
+   - `save_to_file`: if `True` the accounts will be saved to a file
+   - `format`: The format in which the accounts should be stored in the file. `{email}` will be replace with the account email, `{username}` with the username, `password` with the password, `{dob}` with the date of birth, `{region}` will be replaced with the region
 
 5. *`proxy_file`: The name of the file containing a list of proxies to use. Not required if using proxies list in config or not using proxies at all
-- format is `ip:port` or `user:pass@host:port`. If you add a `/rotating` behind the proxy it will be marked as rotating, for example: `ip:port/rotating`
+   - format is `ip:port` or `user:pass@host:port`. If you add a `/rotating` behind the proxy it will be marked as rotating, for example: `ip:port/rotating`
 
 6. *`license`: Your license key, if not given the program will give you a prompt
 
