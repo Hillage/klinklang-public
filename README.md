@@ -27,7 +27,7 @@ The Docker containers and the account_generation script can run on separate host
 2. Create and customize configurations: `python configgenerator.py`
    - Answer all questions, it will create your configs based on your answers
 3. Create config for account_generation script: `cp account_generation/config.example.yml account_generation/config.yml`
-4. Edit config.yml from the previous step according to your needs (see *AccountGeneration Config* section for more info)
+4. Edit config.yml from the previous step according to your needs (see [AccountGeneration Config](#accountgeneration-config) for more info)
 5. Start Docker containers if not started (`docker compose up -d`). Start Account Generation script (`python account_generation/account_generator.py`)
 
 ## AccountGeneration Config
@@ -108,7 +108,6 @@ binary_location: ''
 ## FAQ
 
 #### What is the difference between MailReader and MailServer?
-
 MailServer is an IMAP server (mailserver) that you host yourself. For it to function properly you need to add all needed MX-Records to your domain so that the server can get emails. You can send a test email to your domain, and test if the message appears in the logs. If the received message contains a verification code from PTC, the code will be added to the database for later usage in account activation.
 
 MailReader is a service which can be used to read emails from a provider, e.g. if your domain provider already provides you with a mail server. It will login using the provided username and password to your mail account and will read all messages. If the message contains a verification code it will be saved to the database for later usage in account activation. Messages from niantic will be deleted after they are read.
@@ -116,23 +115,18 @@ MailReader is a service which can be used to read emails from a provider, e.g. i
 You need one or the other, *not both*.
 
 #### Do I need to host a database just for Klinklang?
-
 No. One of the included Docker containers is a MongoDB container which is already set up as needed - just customize your configuration files and start it up.
 
 #### What should I set for account_workers and cookie_workers?
-
 These settings can be ignored, they are left over from previous code and are not used. 
 
 #### What proxy provider should I use?
-
 This is something that is generally kept secret as higher usage increases the chance of the proxy being banned. Based on user reports in Discord, Webshare is generally banned. Residential proxies are often considered "better" when it comes to not being banned already however this is anecdotal.
 
 #### Can I use BasicAuth for my proxies?
-
 While technically supported most users report this does not work for them. If you want to try using BasicAuth make sure you use the format `USER:PASS@IP:PORT`
 
 #### Can I run the account_generation script in PM2?
-
 Yes. It is suggested you set your license in your config, then you can `pm2 start` as normal. If you need to specify your Python interpreter / if using venv just include the `--interpreter` flag.
 
 Example: `pm2 start path/account_generator.py --name klinklang --interpreter /path/to/venv/bin/python`
@@ -140,9 +134,9 @@ Example: `pm2 start path/account_generator.py --name klinklang --interpreter /pa
 
 ## Common Issues
 
-Python error mentioning `undefined symbol`
-- Wrong Python version in use, make sure you are using Python 3.11
+####Python error mentioning `undefined symbol`
+Wrong Python version in use, make sure you are using Python 3.11
 
-Python error `ModuleNotFoundError`
-- Reinstall requirements: `pip install -r account_generation/requirements.txt`
+####Python error `ModuleNotFoundError`
+Reinstall requirements: `pip install -r account_generation/requirements.txt`
 
