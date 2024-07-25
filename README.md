@@ -131,6 +131,12 @@ This is something that is generally kept secret as higher usage increases the ch
 
 While technically supported most users report this does not work for them. If you want to try using BasicAuth make sure you use the format `USER:PASS@IP:PORT`
 
+#### Can I run the account_generation script in PM2?
+
+Yes. It is suggested you set your license in your config, then you can `pm2 start` as normal. If you need to specify your Python interpreter / if using venv just include the `--interpreter` flag.
+
+Example: `pm2 start path/account_generator.py --name klinklang --interpreter /path/to/venv/bin/python`
+
 
 ## Common Issues
 
