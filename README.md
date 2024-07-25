@@ -134,9 +134,9 @@ Example: `pm2 start path/account_generator.py --name klinklang --interpreter /pa
 
 ## Common Issues
 
-####Python error mentioning `undefined symbol`
+#### Python error mentioning `undefined symbol`
 Wrong Python version in use, make sure you are using Python 3.11
 
-####Python error `ModuleNotFoundError`
+#### Python error `ModuleNotFoundError`
 Reinstall requirements: `pip install -r account_generation/requirements.txt`
 
