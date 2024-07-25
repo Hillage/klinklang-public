@@ -10,17 +10,17 @@ The Klinklang stack consists of a MongoDB database, a Stats collector, a mail re
 ### Requirements
 The Docker containers and the account_generation script can run on separate hosts or on the same host. Each host has its own requirements, if using one host for all components you must meet all requirements:
 - Linux (x86/ARM), Mac OS (x86/ARM), or Windows (x86) are supported
-    - The Docker containers can run headless
-    - The account_generation script requires a desktop environment despite running headless
+  - The Docker containers can run headless
+  - The account_generation script requires a desktop environment despite running headless
 
 - Host running account_generation script:
-    - Google Chrome installed on host OS
-    - Python 3.11
-        - pip
-        - PyYAML (`pip install pyYaml`)
+  - Google Chrome installed on host OS
+  - Python 3.11
+    - pip
+    - PyYAML (`pip install pyYaml`)
 
 - Host running Docker containers:
-    - Docker, with Docker components
+  - Docker, with Docker components
 
 - Klinklang license (`$help` in any channel in the Klinklang Discord server)
 
